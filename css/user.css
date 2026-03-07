@@ -202,6 +202,24 @@ color:white;
 font-size:15px;
 }
 
+/* Button */
+.button {
+    padding: 14px;
+    border-radius: 20px;
+    border: none;
+    background: #1DB954;
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    transition: 0.3s ease;
+    padding : 14px 30px;
+}
+
+.button:hover {
+    background: #1ed760;
+    transform: scale(1.03);
+}
+
 /* footer */
 #site-footer {
     background: #000000;
