@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -157,6 +156,77 @@ body {
     font-size: 14px;
 }
 
+/* recent */
+#recent-section {
+    margin-bottom: 50px;
+}
+
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.song-item {
+    display: grid;
+    grid-template-columns: 50px 60px 1fr 220px 80px;
+    align-items: center;
+    padding: 12px 15px;
+    border-radius: 8px;
+    gap: 15px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.song-item:hover {
+    background: #1a1a1a;
+    animation: scale1 1.5s infinite ease-in-out;
+}
+
+.song-rank {
+    font-size: 18px;
+    font-weight: bold;
+    color: #b3b3b3;
+    text-align: center;
+}
+
+.song-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+}
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.song-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.song-artist {
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.song-album {
+    color: #b3b3b3;
+    font-size: 14px;
+}
+
+.song-time {
+    color: #b3b3b3;
+    font-size: 14px;
+    text-align: right;
+}
+
+p {
+    margin: 0;
+}
+
 /* footer */
 #site-footer {
     background: #000000;
@@ -236,7 +306,7 @@ body {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.05);
+        transform: scale(1.01);
     }
     100% {
         transform: scale(1);
