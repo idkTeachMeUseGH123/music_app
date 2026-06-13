@@ -1,5 +1,24 @@
 let form = document.querySelector("form");
 
+const URL = "https://6a1160413e35d0f37ee33624.mockapi.io/users"
+
+users = []
+
+fetch(URL)
+    .then((response) => response.json())
+    .then((data) => {
+        users = data
+        // localStorage.setItem("users", JSON.stringify(data));
+    });
+
+window.checkExistUser = function(email){
+    return users.some(user => user.email === email);
+}
+
+window.checkExistUsername = function(username){
+    return users.some(user => user.username === username);
+}
+
 form.addEventListener("submit", (event) => {
     // Ngặn chặn hành động load mặc định của sever
     event.preventDefault();
@@ -25,33 +44,56 @@ form.addEventListener("submit", (event) => {
         alert("Password must contain an uppercase letter");
     } else if (!password.match(numbers)) {
         alert("Password must contain a number or special character");
+    } else if(checkExistUser(email)){
+        alert("This email has existed, please try another")
+    } else if(checkExistUsername(username)){
+        alert("This username has existed, please try another")
     } else {
-        if (localStorage.getItem("users")) {
-            // Chuyển từ json sang object
-            let users = JSON.parse(localStorage.getItem("users"));
+        // if (localStorage.getItem("users")) {
+        //     // Chuyển từ json sang object
+        //     let users = JSON.parse(localStorage.getItem("users"));
 
-            let newAccount = {
+        //     let newAccount = {
+        //         email,
+        //         password,
+        //         username,
+        //     };
+
+        //     users.push(newAccount);
+
+        //     localStorage.setItem("users", JSON.stringify(users));
+        // } else {
+        //     let mangUser = [];
+        //     let newAccount = {
+        //         email,
+        //         password,
+        //         username,
+        //     };
+        //     mangUser.push(newAccount);
+        //     // Chuyển dữ liệu từ object thành json 
+        //     let userJson = JSON.stringify(mangUser);
+        //     localStorage.setItem("users", userJson);
+        // }
+        // alert("User created successfully, please login");
+        // location.href = "./login.html";
+
+        fetch(URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
                 email,
                 password,
                 username,
-            };
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                localStorage.setItem("users", JSON.stringify(data));
+                alert("User created successfully, please login");
+                location.href = "./login.html";
+            });
 
-            users.push(newAccount);
-
-            localStorage.setItem("users", JSON.stringify(users));
-        } else {
-            let mangUser = [];
-            let newAccount = {
-                email,
-                password,
-                username,
-            };
-            mangUser.push(newAccount);
-            // Chuyển dữ liệu từ object thành json 
-            let userJson = JSON.stringify(mangUser);
-            localStorage.setItem("users", userJson);
-        }
-        alert("User created successfully, please login");
-        location.href = "./login.html";
     }
 });

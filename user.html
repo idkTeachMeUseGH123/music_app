@@ -49,7 +49,7 @@
                     <img src="./images/user.jpg">
                 </div>
                 <div class="user-info">
-                    <h1>username123</h1>
+                    <h1 id="userRecentlyH1">None</h1>
                     <div class="stats">
                         <div>
                             <span>120</span>
@@ -81,17 +81,17 @@
 
             <div class="field">
                 <label>Username</label>
-                <input type="text" value="username123" readonly>
+                <input type="text" value="None" readonly id="userRecently">
             </div>
 
             <div class="field">
                 <label>Email</label>
-                <input type="text" value="user@email.com" readonly>
+                <input type="text" value="None" readonly id="emailRecently">
             </div>
 
             <div class="field">
                 <label>Password</label>
-                <input type="password" value="12345678" readonly>
+                <input type="password" value="None" readonly id="passwordRecently">
             </div>
             <a href="./login.html"><button class="button">Logout</button></a>
         </div>
@@ -153,6 +153,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src = "js/user.js"></script>
 </body>
 
 </html>
