@@ -24,7 +24,7 @@ window.renderAccount = (data) => {
 
     document.getElementById("userRecentlyH1").textContent = takeUser
     userRecently.value = takeUser
-    
+
     // for(let i = 0; i < users.length; i++){
 
     //     if (users[i].username == takeUser){

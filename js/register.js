@@ -8,21 +8,20 @@ fetch(URL)
     .then((response) => response.json())
     .then((data) => {
         users = data
-        // localStorage.setItem("users", JSON.stringify(data));
     });
 
-window.checkExistUser = function(email){
+window.checkExistUser = function (email) {
     return users.some(user => user.email === email);
 }
 
-window.checkExistUsername = function(username){
+window.checkExistUsername = function (username) {
     return users.some(user => user.username === username);
 }
 
 form.addEventListener("submit", (event) => {
     // Ngặn chặn hành động load mặc định của sever
     event.preventDefault();
-
+    const role = "user";
     let username = document.getElementById("username").value.trim();
     let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value.trim();
@@ -31,9 +30,10 @@ form.addEventListener("submit", (event) => {
     let lowerCaseLetter = /[a-z]/g;
     let upperCaseLetter = /[A-Z]/g;
     let numbers = /[0-9]/g;
+    const phonePattern = /^[0-9]{10,}$/;
 
-    if (username.length < 6) {
-        alert("Username must be at least 6 characters");
+    if (username.length < 3) {
+        alert("Username must be at least 3 characters");
     } else if (password.length < 8) {
         alert("Password must be at least 8 characters");
         // Kiểm tra password có kí tự viết thường không
@@ -44,39 +44,11 @@ form.addEventListener("submit", (event) => {
         alert("Password must contain an uppercase letter");
     } else if (!password.match(numbers)) {
         alert("Password must contain a number or special character");
-    } else if(checkExistUser(email)){
+    } else if (checkExistUser(email)) {
         alert("This email has existed, please try another")
-    } else if(checkExistUsername(username)){
+    } else if (checkExistUsername(username)) {
         alert("This username has existed, please try another")
     } else {
-        // if (localStorage.getItem("users")) {
-        //     // Chuyển từ json sang object
-        //     let users = JSON.parse(localStorage.getItem("users"));
-
-        //     let newAccount = {
-        //         email,
-        //         password,
-        //         username,
-        //     };
-
-        //     users.push(newAccount);
-
-        //     localStorage.setItem("users", JSON.stringify(users));
-        // } else {
-        //     let mangUser = [];
-        //     let newAccount = {
-        //         email,
-        //         password,
-        //         username,
-        //     };
-        //     mangUser.push(newAccount);
-        //     // Chuyển dữ liệu từ object thành json 
-        //     let userJson = JSON.stringify(mangUser);
-        //     localStorage.setItem("users", userJson);
-        // }
-        // alert("User created successfully, please login");
-        // location.href = "./login.html";
-
         fetch(URL, {
             method: "POST",
             headers: {
@@ -86,6 +58,7 @@ form.addEventListener("submit", (event) => {
                 email,
                 password,
                 username,
+                role: "user",
             }),
         })
             .then((response) => response.json())
