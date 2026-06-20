@@ -10,10 +10,6 @@ fetch(URL)
     })
     .then(error => console.log(error))
 
-// window.checkExistUsername = function(username){
-//     return users.some(user => user.username === username);
-// }
-
 window.renderAccount = (data) => {
 
     const userRecently = document.getElementById("userRecently")
@@ -25,22 +21,26 @@ window.renderAccount = (data) => {
     document.getElementById("userRecentlyH1").textContent = takeUser
     userRecently.value = takeUser
 
-    // for(let i = 0; i < users.length; i++){
-
-    //     if (users[i].username == takeUser){
-
-    //         console.log(users[i].email)
-
-    //         emailRecently.value = users[i].email
-    //         passwordRecently.value = users[i].password
-
-    //     }
-
-    // }
-
     info = users.find(user => user.username == takeUser)
 
     emailRecently.value = info.email
     passwordRecently.value = info.password
 
+}
+
+function logout() {
+    localStorage.removeItem("recentUser");
+    location.href = "./login.html";
+}
+
+function admin() {
+    const info = users.find(
+        user => user.username === localStorage.getItem("recentUser")
+    );
+
+    if (info?.role === "admin") {
+        location.href = "./admin.html";
+    } else {
+        alert("You are not admin");
+    }
 }
