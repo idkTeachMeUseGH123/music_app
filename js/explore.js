@@ -8,7 +8,7 @@ fetch(url)
         let albums = data.filter(x => x.type === "album");
         let artists = data.filter(x => x.type === "artist");
 
-        const artist = artists.splice(2, 8);
+        const artist = artists.splice(2, artists.length - 1);
         const artistGrid = document.querySelector('#artist');
         artist.forEach(product => {
             const productCard = `
@@ -20,7 +20,7 @@ fetch(url)
             artistGrid.innerHTML += productCard;
         });
 
-        const song = songs.splice(0, 6);
+        const song = songs;
         const songGrid = document.querySelector('#song');
         song.forEach(product => {
             const productCard = `
@@ -33,7 +33,7 @@ fetch(url)
             songGrid.innerHTML += productCard;
         });
 
-        const album = albums.splice(0, 6);
+        const album = albums;
         const albumGrid = document.querySelector('#album');
         album.forEach(product => {
             const productCard = `
