@@ -1,117 +1,108 @@
-// const url = "https://6a1160413e35d0f37ee33624.mockapi.io/music_album"
 
-// fetch(url)
-//     // Chuyển từ json qua object
-//     .then(res => res.json())
-//     .then(data => {
-//         const list = data.splice(0, 3);
-//         const songGrid = document.querySelector('.song-list');
-//         let i = 1;
-//         list.forEach(product => {
-//             const productCard = `
-//                 <div class="song-item" onclick="getProductById('${product.id}')">
-//                     <span class="song-rank">${i}</span>
-//                     <img src="${product.image}">
-//                     <div class="song-info">
-//                         <p class="song-name">${product.title}</p>
-//                         <p class="song-artist">${product.artist}</p>
-//                     </div>
-//                     <span class="song-album">${product.album}</span>
-//                     <span class="song-time">${product.duration}</span>
-//                 </div>         
-//             `;
-//             i++;
-//             songGrid.innerHTML += productCard;
-//         });
-
-//         const DataHome = data.splice(0, 7);
-//         const productGrid = document.querySelector('.album-grid');
-//         DataHome.forEach(product => {
-//             const productCard = `
-//                 <div class="album-card" onclick="getProductById('${product.id}')">
-//                     <img src="${product.image}">
-//                     <p class="album-title">${product.title}</p>
-//                     <p class="album-artist">${product.artist}</p>
-//                 </div>          
-//             `;
-//             productGrid.innerHTML += productCard;
-//         });
-        
-//         const carouselButtons = document.querySelectorAll('.carousel-btn-detail');
-//         const carouselIds = [allData[0].id, allData[1].id, allData[2].id];
-//         carouselButtons.forEach((btn, index) => {
-//             btn.setAttribute('onclick', `getProductById('${carouselIds[index]}')`);
-//         });
-
-//     })
-//     .catch(error => console.error('Error fetching data:', error));
-
-// window.getProductById = function getProductById(id) {
-//     fetch(`${url}/${id}`)
-//         .then(res => res.json())
-//         .then(product => {
-//             console.log(product);
-//             localStorage.setItem("choosedProduct", JSON.stringify(product));
-//             location.href = "./detail.html";
-//         })
-//         .catch(error => console.error(error));
-
-//     }
-const url = "https://6a1160413e35d0f37ee33624.mockapi.io/music_album"
+const url = "https://6a1160413e35d0f37ee33624.mockapi.io/music_album";
 
 fetch(url)
     .then(res => res.json())
     .then(data => {
-        // const allData = [...data];
 
-        // const charliePuth  = allData.find(p => p.artist === "Charlie Puth" && p.type === "artist");
-        // const wdta         = allData.find(p => p.title === "We Don't Talk Anymore" && p.type === "song");
-        // const taylorSwift  = allData.find(p => p.artist === "Taylor Swift" && p.type === "artist");
+        const charliePuth = data.find(item => item.artist === "Charlie Puth" && item.type === "artist");
+        const wdta = data.find(item => item.title === "We Don't Talk Anymore" && item.type === "song");
+        const taylorSwift = data.find(item => item.artist === "Taylor Swift" && item.type === "artist");
 
-        // const carouselIds = [charliePuth?.id, wdta?.id, taylorSwift?.id];
+        const carouselData = [
+            {
+                item: charliePuth,
+                tag: "Artist of the Day",
+                title: "Charlie Puth:<br>Perfect Pitch Pop Sensation",
+                desc: "Grammy-nominated singer, songwriter and producer known for his perfect pitch.",
+                tagColor: "",
+                btnColor: "",
+                btnTextColor: "",
+                detail: "View Profile"
+            },
+            {
+                item: wdta,
+                tag: "Best Song",
+                title: "We Don't Talk Anymore",
+                desc: "The smash hit featuring Selena Gomez — over 3 billion streams and counting worldwide.",
+                tagColor: "#00bfff",
+                btnColor: "#00bfff",
+                btnTextColor: "#000",
+                detail: "View Song"
+            },
+            {
+                item: taylorSwift,
+                tag: "Artist of the Year",
+                title: "Taylor Swift:<br>The Eras Tour Icon",
+                desc: "Record-breaking tours, 14 Grammys, and a cultural phenomenon that defined an era.",
+                tagColor: "#FFD700",
+                btnColor: "#FFD700",
+                btnTextColor: "#000",
+                detail: "View Profile"
+            }
+        ];
 
-        // const carouselButtons = document.querySelectorAll('.carousel-btn-play');
-        // carouselButtons.forEach((btn, index) => {
-        //     if (carouselIds[index]) {
-        //         btn.setAttribute('onclick', `getProductById('${carouselIds[index]}')`);
-        //     }
-        // });
+        const carouselInner = document.querySelector(".carousel-inner");
+        carouselInner.innerHTML = "";
 
+        carouselData.forEach((product, index) => {
+            carouselInner.innerHTML += `
+                <div class="carousel-item ${index === 0 ? "active" : ""}">
+                    <div class="hero-slide">
+                        <img src="${product.item.image}" alt="${product.item.artist}">
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <p class="hero-tag" ${product.tagColor ? `style="color:${product.tagColor}"` : ""}> ${product.tag} </p>
+                            <h2 class="hero-title"> ${product.title} </h2>
+                            <p class="hero-desc"> ${product.desc} </p>
+                            <div class="hero-buttons">
+                                <button class="btn-primary-custom" ${product.btnColor ? `style="background:${product.btnColor}; color:${product.btnTextColor}"` : ""} onclick="getProductById('${product.item.id}')"> Play Now </button>
+                                <button class="btn-secondary-custom" onclick="getProductById('${product.item.id}')"> ${product.detail} </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // ===== Top Charts =====
         const list = data.splice(0, 3);
-        const songGrid = document.querySelector('.song-list');
+        const songGrid = document.querySelector(".song-list");
+
         let i = 1;
+
         list.forEach(product => {
-            const productCard = `
+            songGrid.innerHTML += `
                 <div class="song-item" onclick="getProductById('${product.id}')">
                     <span class="song-rank">${i}</span>
-                    <img src="${product.image}">
+                    <img src="${product.image}" alt="${product.title}">
                     <div class="song-info">
                         <p class="song-name">${product.title}</p>
                         <p class="song-artist">${product.artist}</p>
                     </div>
                     <span class="song-album">${product.album}</span>
                     <span class="song-time">${product.duration}</span>
-                </div>         
+                </div>
             `;
             i++;
-            songGrid.innerHTML += productCard;
         });
 
+        // ===== New Releases =====
         const DataHome = data.splice(0, 7);
-        const productGrid = document.querySelector('.album-grid');
+        const productGrid = document.querySelector(".album-grid");
+
         DataHome.forEach(product => {
-            const productCard = `
+            productGrid.innerHTML += `
                 <div class="album-card" onclick="getProductById('${product.id}')">
-                    <img src="${product.image}">
+                    <img src="${product.image}" alt="${product.title}">
                     <p class="album-title">${product.title}</p>
                     <p class="album-artist">${product.artist}</p>
-                </div>          
+                </div>
             `;
-            productGrid.innerHTML += productCard;
         });
 
     })
-    .catch(error => console.error('Error fetching data:', error));
+    .catch(error => console.error("Error fetching data:", error));
 
 function getProductById(id) {
     fetch(`${url}/${id}`)

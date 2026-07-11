@@ -1,0 +1,1 @@
+n=int(input());tong=0;tong+=n//20;n%=20;tong+=n//10;n%=10;tong+=n//5;n%=5;tong+=n;print(tong)

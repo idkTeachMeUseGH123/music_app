@@ -25,7 +25,12 @@ window.renderAccount = (data) => {
 
     emailRecently.value = info.email
     passwordRecently.value = info.password
-
+    
+    if (info.role === "admin") {
+        document.querySelector(".link").innerHTML += `
+            <button class="button" onclick="admin()" style="background-color: gray; margin-left: 20px;"> Admin </button>
+        `;
+    }
 }
 
 function logout() {
@@ -34,13 +39,5 @@ function logout() {
 }
 
 function admin() {
-    const info = users.find(
-        user => user.username === localStorage.getItem("recentUser")
-    );
-
-    if (info?.role === "admin") {
-        location.href = "./admin.html";
-    } else {
-        alert("You are not admin");
-    }
+    location.href = "./admin.html";
 }
