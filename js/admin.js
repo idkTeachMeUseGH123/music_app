@@ -69,7 +69,6 @@ const fieldDuration = document.getElementById("field-duration");
 const fieldDescription = document.getElementById("field-description");
 const fieldUrl = document.getElementById("field-url");
 
-const toast = document.getElementById("toast");
 
 // ── init ──
 document.querySelectorAll(".admin-nav-link").forEach(btn => {
