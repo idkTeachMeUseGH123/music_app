@@ -173,13 +173,6 @@ function updatePlayIcon() {
     icon.classList.toggle("fa-pause", isPlaying);
 }
 
-function getYoutubeId(url) {
-    if (!url) return null;
-    const regex = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/;
-    const match = url.match(regex);
-    return match ? match[1] : null;
-}
-
 
 function getOrCreateAudioFrame() {
     let audioFrame = document.getElementById("audio-player-frame");
@@ -192,7 +185,6 @@ function getOrCreateAudioFrame() {
         audioFrame.style.position = "fixed";
         audioFrame.style.right = "20px";
         audioFrame.style.bottom = "20px";
-        audioFrame.style.zIndex = "9999";
         audioFrame.allow = "autoplay; encrypted-media";
         audioFrame.setAttribute("frameborder", "0");
         document.body.appendChild(audioFrame);
@@ -202,15 +194,9 @@ function getOrCreateAudioFrame() {
 }
 
 function playSong() {
-    const videoId = getYoutubeId(product.url);
-
-    if (!videoId) {
-        alert("Song not found");
-        return;
-    }
 
     const audioFrame = getOrCreateAudioFrame();
-    audioFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    audioFrame.src = product.url;
 
     isPlaying = true;
     updatePlayIcon();
