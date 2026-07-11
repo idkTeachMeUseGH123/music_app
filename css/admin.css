@@ -328,46 +328,6 @@
     margin-top: 10px;
 }
 
-/* ── toast ── */
-/* .admin-toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    max-width: min(360px, calc(100vw - 40px));
-    width: max-content;
-    box-sizing: border-box;
-    background: #1DB954;
-    color: #000;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 1.4;
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    padding: 14px 24px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(12px);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
-    z-index: 3000;
-}
-
-.admin-toast.error {
-    background: #e22134;
-    color: #fff;
-}
-
-.admin-toast.show {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0s;
-} */
-
 /* ── responsive ── */
 @media (max-width: 900px) {
     #main-header {

@@ -163,15 +163,15 @@ function getProductById(id) {
 }
 
 //LỖI LINK YT =(
-// var isPlaying = false;
+var isPlaying = false;
 
-// function updatePlayIcon() {
-//     const icon = document.getElementById("play-icon");
-//     if (!icon) return;
+function updatePlayIcon() {
+    const icon = document.getElementById("play-icon");
+    if (!icon) return;
 
-//     icon.classList.toggle("fa-play", !isPlaying);
-//     icon.classList.toggle("fa-pause", isPlaying);
-// }
+    icon.classList.toggle("fa-play", !isPlaying);
+    icon.classList.toggle("fa-pause", isPlaying);
+}
 
 // function getYoutubeId(url) {
 //     if (!url) return null;
@@ -181,72 +181,62 @@ function getProductById(id) {
 // }
 
 
-// function getOrCreateAudioFrame() {
-//     let audioFrame = document.getElementById("audio-player-frame");
+function getOrCreateAudioFrame() {
+    let audioFrame = document.getElementById("audio-player-frame");
 
-//     if (!audioFrame) {
-//         audioFrame = document.createElement("iframe");
-//         audioFrame.id = "audio-player-frame";
-//         // audioFrame.style.display = "none";
-//         audioFrame.style.width = "560px";
-//         audioFrame.style.height = "315px";
-//         audioFrame.style.position = "fixed";
-//         audioFrame.style.right = "20px";
-//         audioFrame.style.bottom = "20px";
-//         audioFrame.style.zIndex = "9999";
-//         audioFrame.allow = "autoplay; encrypted-media";
-//         audioFrame.setAttribute("frameborder", "0");
-//         document.body.appendChild(audioFrame);
-//     }
+    if (!audioFrame) {
+        audioFrame = document.createElement("iframe");
+        audioFrame.id = "audio-player-frame";
+        audioFrame.style.width = "560px";
+        audioFrame.style.height = "315px";
+        audioFrame.style.position = "fixed";
+        audioFrame.style.right = "20px";
+        audioFrame.style.bottom = "20px";
+        audioFrame.style.zIndex = "9999";
+        audioFrame.allow = "autoplay; encrypted-media";
+        audioFrame.setAttribute("frameborder", "0");
+        document.body.appendChild(audioFrame);
+    }
 
-//     return audioFrame;
-// }
-
-// // function playSong() {
-// //     const videoId = getYoutubeId(product.url);
-
-// //     if (!videoId) {
-// //         alert("Song not found");
-// //         return;
-// //     }
-
-// //     const audioFrame = getOrCreateAudioFrame();
-// //     audioFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-
-// //     isPlaying = true;
-// //     updatePlayIcon();
-// // }
-// function playSong() {
-//     const videoId = getYoutubeId(product.url);
-
-//     const audioFrame = getOrCreateAudioFrame();
-
-//     audioFrame.src =
-//         `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-
-//     console.log(audioFrame.src);
-// }
-
-// function pauseSong() {
-//     const audioFrame = document.getElementById("audio-player-frame");
-//     if (audioFrame) audioFrame.src = "";
-
-//     isPlaying = false;
-//     updatePlayIcon();
-// }
-
-// function playBtn() {
-//     if (product.type !== "song") {
-//         window.open(product.url, "_blank");
-//         return;
-//     }
-
-//     if (isPlaying) {
-//         pauseSong();
-//     } else {
-//         playSong();
-//     }
-// }
-function playBtn() {
-    window.open(product.url, "_blank");
+    return audioFrame;
 }
+
+function playSong() {
+    // const videoId = getYoutubeId(product.url);
+
+    // if (!videoId) {
+    //     alert("Song not found");
+    //     return;
+    // }
+
+    const audioFrame = getOrCreateAudioFrame();
+    audioFrame.src = product.url;
+    // audioFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+    isPlaying = true;
+    updatePlayIcon();
+}
+
+function pauseSong() {
+    const audioFrame = document.getElementById("audio-player-frame");
+    if (audioFrame) audioFrame.src = "";
+
+    isPlaying = false;
+    updatePlayIcon();
+}
+
+function playBtn() {
+    if (product.type !== "song") {
+        window.open(product.url, "_blank");
+        return;
+    }
+
+    if (isPlaying) {
+        pauseSong();
+    } else {
+        playSong();
+    }
+}
+// function playBtn() {
+//     window.open(product.url, "_blank");
+// }

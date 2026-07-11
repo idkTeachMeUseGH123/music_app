@@ -5,7 +5,7 @@ let currentType = "song";
 let searchTerm = "";
 let pendingDeleteId = null;
 
-// column config per type
+// column 
 const COLUMNS = {
     song: [
         { key: "image", label: "", isImage: true },
@@ -277,11 +277,9 @@ function handleSubmit(e) {
             }
             closeForm();
             renderTable();
-            // showToast(id ? "Item updated." : "Item added.");
         })
         .catch(err => {
             console.error(err);
-            // showToast("Something went wrong. Please try again.", true);
         })
         .finally(() => {
             saveBtn.disabled = false;
@@ -324,13 +322,3 @@ function confirmDelete() {
             deleteConfirm.textContent = "Delete";
         });
 }
-
-// ── toast ──
-// let toastTimer = null;
-// function showToast(message, isError = false) {
-//     clearTimeout(toastTimer);
-//     toast.textContent = message;
-//     toast.classList.toggle("error", isError);
-//     toast.classList.add("show");
-//     toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
-// }
