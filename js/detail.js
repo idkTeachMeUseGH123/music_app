@@ -173,12 +173,12 @@ function updatePlayIcon() {
     icon.classList.toggle("fa-pause", isPlaying);
 }
 
-// function getYoutubeId(url) {
-//     if (!url) return null;
-//     const regex = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/;
-//     const match = url.match(regex);
-//     return match ? match[1] : null;
-// }
+function getYoutubeId(url) {
+    if (!url) return null;
+    const regex = /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
 
 
 function getOrCreateAudioFrame() {
@@ -202,16 +202,15 @@ function getOrCreateAudioFrame() {
 }
 
 function playSong() {
-    // const videoId = getYoutubeId(product.url);
+    const videoId = getYoutubeId(product.url);
 
-    // if (!videoId) {
-    //     alert("Song not found");
-    //     return;
-    // }
+    if (!videoId) {
+        alert("Song not found");
+        return;
+    }
 
     const audioFrame = getOrCreateAudioFrame();
-    audioFrame.src = product.url;
-    // audioFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    audioFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 
     isPlaying = true;
     updatePlayIcon();

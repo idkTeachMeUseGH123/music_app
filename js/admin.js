@@ -227,11 +227,9 @@ function handleSubmit(e) {
     e.preventDefault();
 
     if (!fieldArtist.value.trim()) {
-        // showToast("Artist is required.", true);
         return;
     }
     if (fieldTitle.required && !fieldTitle.value.trim()) {
-        // showToast("Title is required.", true);
         return;
     }
 
