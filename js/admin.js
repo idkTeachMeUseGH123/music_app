@@ -2,7 +2,6 @@ const API_URL = "https://6a1160413e35d0f37ee33624.mockapi.io/music_album";
 
 let allData = [];
 let currentType = "song";
-// let searchTerm = "";
 let pendingDeleteId = null;
 
 // column 
@@ -42,7 +41,6 @@ const tableBody = document.getElementById("table-body");
 const emptyState = document.getElementById("empty-state");
 const panelTitle = document.getElementById("panel-title");
 const panelSubtitle = document.getElementById("panel-subtitle");
-// const searchInput = document.getElementById("search-input");
 const addBtn = document.getElementById("add-btn");
 
 const modalOverlay = document.getElementById("modal-overlay");
@@ -79,17 +77,10 @@ document.querySelectorAll(".admin-nav-link").forEach(btn => {
         document.querySelectorAll(".admin-nav-link").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         currentType = btn.dataset.type;
-        // searchInput.value = "";
-        // searchTerm = "";
         updatePanelHeader();
         renderTable();
     });
 });
-
-// searchInput.addEventListener("input", () => {
-//     searchTerm = searchInput.value.trim().toLowerCase();
-//     renderTable();
-// });
 
 addBtn.addEventListener("click", () => openForm());
 modalClose.addEventListener("click", closeForm);
@@ -135,14 +126,6 @@ function renderTable() {
     tableHead.innerHTML = `<tr>${cols.map(c => `<th>${c.label}</th>`).join("")}<th style="text-align:right">Actions</th></tr>`;
 
     let items = allData.filter(item => item.type === currentType);
-
-    // if (searchTerm) {
-    //     items = items.filter(item =>
-    //         (item.title || "").toLowerCase().includes(searchTerm) ||
-    //         (item.artist || "").toLowerCase().includes(searchTerm) ||
-    //         (item.album || "").toLowerCase().includes(searchTerm)
-    //     );
-    // }
 
     if (items.length === 0) {
         tableBody.innerHTML = "";
