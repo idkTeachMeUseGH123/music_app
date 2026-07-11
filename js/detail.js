@@ -174,7 +174,8 @@ function updatePlayIcon() {
 }
 
 
-function getOrCreateAudioFrame() {
+
+function createFrame() {
     let audioFrame = document.getElementById("audio-player-frame");
 
     if (!audioFrame) {
@@ -195,7 +196,7 @@ function getOrCreateAudioFrame() {
 
 function playSong() {
 
-    const audioFrame = getOrCreateAudioFrame();
+    const audioFrame = createFrame();
     audioFrame.src = product.url;
 
     isPlaying = true;
