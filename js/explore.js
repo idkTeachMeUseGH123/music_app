@@ -20,7 +20,7 @@ fetch(url)
             artistGrid.innerHTML += productCard;
         });
 
-        const song = songs.splice(0, songs.length - 2);
+        const song = songs;
         const songGrid = document.querySelector('#song');
         song.forEach(product => {
             const productCard = `
